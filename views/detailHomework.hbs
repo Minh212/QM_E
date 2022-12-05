@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Manage Teacher</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div class="container">
+		<div class="c-item nav">
+			<div class="logo-uni">
+				<img src="/images/logo_QM.png" alt="">
+			</div>
+			<a href="/teacher">
+				<li>Home</li>
+			</a>
+
+			<a href="/teacher/classesTeacher">
+				<li style="background-color: #ddd;">Classes</li>
+			</a>
+		</div>
+		<div class="c-item search">
+			<form action="/admin/search" method="post" name="myForm" onsubmit="return validateForm()">
+				<input type="text" name="txtSearch" placeholder="Search username">
+			</form>
+		</div>
+		<div class="c-item profile">
+			<div class="user">
+				<img src="/images/logo-admin.png" height="50" alt="">
+				{{user.name}}
+				<div class="dropdown">
+					<a href="/teacher/profileTeacher"> Profile </a>
+					<a href="/logout"> Logout </a>
+				</div>
+			</div>
+		</div>
+		<div class="c-item controller">
+			
+			<div>
+				<a href="/teacher/mark?title={{assignment.title}}">Mark</a>
+			</div>
+		</div>
+		<div class="c-item body">
+				
+				Title: {{assignment.title}} <br>
+				{{#each assignment.files}}
+				<a style="color: blue;" href="/downloadzipp?filename={{filename}}">{{filename}}</a> <br>
+				{{/each}}
+				<br>
+				
+				<br>
+			{{!-- Comment --}}
+			<div class="form-comment">
+				<form onsubmit="return postComment(this)" style="margin-bottom:10px ;">
+					<input type="hidden" id="userName" value="{{teacher.name}}">
+					<input type="hidden" id="title" value="{{assignment.title}}">
+					<div class="mb-3 mt-3">
+						<label for="comment">Comments:</label>
+						<textarea class="form-control" rows="4" id="comment" name="txtComment" style="width: 98%;"
+							placeholder="Write a comment..."></textarea>
+					</div>
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+				<ul id="comments">
+					{{#each assignment.comment}}
+					<li class="listComment">
+						<span>{{user}}</span> <span style="color: gray;">{{date}}</span>
+						<p style="margin-bottom: 0;">{{comments}}</p>
+					</li>
+					{{/each}}
+				</ul>
+			</div>
+		</div>
+	</div>
+	{{!-- <footer>
+		QM - English
+	</footer> --}}
+
+	<script>
+		//user comment
+		function postComment(comment) {
+			var ajax = new XMLHttpRequest;
+			ajax.open("POST", "user-comment")
+			ajax.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+			const userName = document.querySelector('#userName').value;
+			const title = document.querySelector('#title').value;
+			const commentUser = document.querySelector('#comment');
+
+			//date time current
+			const d = new Date();
+			var minutes = d.getMinutes();
+			var formatDate = ""
+
+			if (minutes > 9) {
+				formatDate = [d.getHours(), d.getMinutes()].join(':') + ' ' + [d.getDate(), d.getMonth() + 1, d.getFullYear()].join('/')
+			} else {
+				var minutes = '0' + minutes;
+				formatDate = [d.getHours(), minutes].join(':') + ' ' + [d.getDate(), d.getMonth() + 1, d.getFullYear()].join('/')
+			}
+			const date = formatDate;
+
+
+			const comments = document.querySelector('#comments');
+			var html = ""
+			html += '<li class="listcomment">';
+			html += '<span>' + userName + '</span>  <span style="color: gray;">' + date + '</span>';
+			html += '<p style="margin-bottom: 0;">' + commentUser.value + '</p>';
+			html += '</li>';
+
+
+			document.getElementById("comments").innerHTML = html + document.getElementById("comments").innerHTML;
+
+
+			ajax.send("title=" + title + "&comment=" + commentUser.value);
+
+			commentUser.value = "";
+			return false;
+		}
+	</script>
+</body>
+
+</html>

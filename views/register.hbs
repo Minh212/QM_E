@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+
+<body>
+    <h1>Enter Student Information</h1>
+    <div class="c-item body">
+        <form action="register" method="post" enctype="multipart/form-data">
+            Username: <input type="text" name="username" required> <br><br>
+            Role:
+            <select name="role">
+                <option value="Student">Student</option>
+                <option value="Teacher">Teacher</option>
+            </select><br><br>
+            Password: <input type="password" name="password" required> <br><br>
+            Full name: <input type="text" name="studentName" required> <br> <br>
+            Email: <input type="email" name="email" required> <br><br>
+            Age: <input type="number" name="studentAge" min="6" required> <br><br>
+            Phone: <input type="text" name="phone" required> <br><br>
+            Address: <input type="text" name="address" id="add" required> <br><br>
+            Choose images: <br>
+            <input type="file" name="myFiles"><br><br>
+
+            <input id="save" type="submit" value="Add">
+            <a id="cancel" href="/admin/manageStudent">Cancel</a>
+        </form>
+    </div>
+</body>
+
+</html>

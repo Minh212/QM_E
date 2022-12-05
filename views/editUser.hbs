@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="c-item nav">
+            <div class="logo-uni">
+                <img src="/images/logo_QM.png" alt="">
+            </div>
+            <a href="/admin">
+                <li>Home</li>
+            </a>
+            <a href="/admin/manageStudent">
+                <li>Manage Students</li>
+            </a>
+            <a href="/admin/manageTeacher">
+                <li>Manage Teachers</li>
+            </a>
+            <a href="/admin/manageClass">
+                <li>Manage Classes</li>
+            </a>
+        </div>
+        <div class="c-item search">
+            <form action="/admin/search" method="post" name="myForm" onsubmit="return validateForm()">
+                <input type="text" name="txtSearch" placeholder="Search username">
+            </form>
+        </div>
+        <div class="c-item profile">
+            <div class="user">
+                <img src="/images/logo-admin.png" height="50" alt="">
+                {{user.name}}
+                <div class="dropdown">
+                    <a href="/admin/updateAdmin"> Update profile </a>
+                    <a href="/logout"> Logout </a>
+                </div>
+            </div>
+        </div>
+       
+        <div class="c-item body">
+            <h2>Edit User</h2>
+            <form action="editUser" method="post">
+                <input type="hidden" name="txtID" value="{{ur._id}}">
+                Full name: <input type="text" name="name" value="{{ur.name}}" required> <br> <br>
+                Username: <input type="text" name="username" value="{{ur.userName}}" required> <br><br>
+                Email: <input type="text" name="email" value="{{ur.email}}" > <br><br>
+                Age: <input type="number" name="age" min="6" value="{{ur.age}}" required> <br><br>
+                Phone: <input type="text" name="phone" value="{{ur.phone}}" required> <br><br>
+                Address: <input type="text" name="address" value="{{ur.address}}" required> <br><br>
+                Choose images: <br>
+                <input type="file" name="myFiles" value="{{ur.files}}"><br><br>
+
+                <input id="save" type="submit" value="Save">
+                <a id="cancel" href="/admin">Cancel</a>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        QM - English
+    </footer>
+</body>
+
+</html>

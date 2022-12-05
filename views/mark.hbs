@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <title>Manage Student</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="c-item nav">
+            <div class="logo-uni">
+                <img src="/images/logo_QM.png" alt="">
+            </div>
+            <a href="/teacher">
+                <li>Home</li>
+            </a>
+            
+            <a href="/teacher/classesTeacher">
+                <li>Classes</li>
+            </a>
+        </div>
+        <div class="c-item search">
+            <form action="/admin/search" method="post" name="myForm" onsubmit="return validateForm()">
+                <input type="text" name="txtSearch" placeholder="Search username">
+            </form>
+        </div>
+        <div class="c-item profile">
+            <div class="user">
+                <img src="/images/logo-admin.png" height="50" alt="">
+                {{user.name}}
+                <div class="dropdown">
+                    <a href="/admin/updateAdmin"> Update profile </a>
+                    <a href="/logout"> Logout </a>
+                </div>
+            </div>
+        </div>
+        <style>
+            .wrap-1-2 {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+        </style>
+        <input type="hidden" value="{{mark.submitAss.length}}" id="count-ass">
+        <div class="c-item body">
+            <div class="wrap-1-2">
+                <h2>Student has submitted</h2>
+                <h2>Number of members who have submitted: <span id="d-count-ass"></span></h2>
+            </div>
+            <table>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Submitted submissions</th>
+                    <th>Score</th>
+                    <th>Controller</th>
+                </tr>
+                {{#each mark.submitAss}}
+                <tr>
+                    <td>{{student}}</td>
+                    <td><a style="color: blue;" href="/downloadzipp?filename={{file.[0].filename}}">{{file.[0].filename}}</a></td>
+                    <td>{{score}}</td>
+                    <td>
+                        <center>
+                            <a id="save" href="/teacher/scoreStudent?student={{student}}&title={{title}}">Score</a>
+                           
+
+                            <a id="delete" href="/admin/deleteStudent?userName={{student}}"
+                                onclick="return confirm('Delete this student?');">Delete</a>
+                        </center>
+                    </td>
+                    
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+    </div>
+    <footer>
+        QM - English
+    </footer>
+    <script>
+        document.getElementById("d-count-ass").innerHTML= $("#count-ass").val()
+    </script>
+</body>
+
+</html>

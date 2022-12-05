@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="c-item nav">
+            <div class="logo-uni">
+                <img src="/images/logo_QM.png" alt="">
+            </div>
+            <a href="/admin">
+                <li>Home</li>
+            </a>
+            <a href="/admin/manageStudent">
+                <li>Manage Students</li>
+            </a>
+            <a href="/admin/manageStudent">
+                <li>Manage Students</li>
+            </a>
+            <a href="/admin/manageClass">
+                <li>Manage Classes</li>
+            </a>
+        </div>
+        <div class="c-item search">
+            <form action="/admin/search" method="post" name="myForm" onsubmit="return validateForm()">
+                <input type="text" name="txtSearch" placeholder="Search username">
+            </form>
+        </div>
+        <div class="c-item profile">
+            <div class="user">
+                <img src="/images/logo-admin.png" height="50" alt="">
+                {{user.name}}
+                <div class="dropdown">
+                    <a href="/admin/updateAdmin"> Update profile </a>
+                    <a href="/logout"> Logout </a>
+                </div>
+            </div>
+        </div>
+        <div class="c-item controller">
+            <div>
+                <a href="/admin/addStudent">Add Student</a>
+            </div>
+            <div>
+                <a href="/admin/addStudent">Add Student</a>
+            </div>
+        </div>
+        <div class="c-item body">
+            <h2>Profile Student</h2>
+            <form action="editStudent" method="post">
+                <input type="hidden" name="txtID" value="{{student._id}}">
+                Username: <input type="text" name="username" value="{{student.userName}}"> <br><br>
+                Password: <input type="text" name="username" value="{{student.password}}"> <br><br>
+
+                Full name: <input type="text" name="name" value="{{student.name}}"> <br> <br>
+
+                Email: <input type="text" name="email" value="{{student.email}}"> <br><br>
+                Age: <input type="number" name="age" min="6" value="{{student.age}}"> <br><br>
+                Phone: <input type="text" name="phone" value="{{student.phone_number}}"> <br><br>
+                Address: <input type="text" name="address" value="{{student.address}}"> <br><br>
+                Choose images: <br>
+                <input type="file" name="myFiles" value="{{student.files}}"><br><br>
+
+                <input id="save" type="submit" value="Save">
+                <a id="cancel" href="/student/profileStudent">Cancel</a>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        QM - English
+    </footer>
+</body>
+
+</html>

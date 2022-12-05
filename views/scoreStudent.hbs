@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scoring for Student</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="c-item nav">
+            <div class="logo-uni">
+                <img src="/images/logo_QM.png" alt="">
+            </div>
+            <a href="/teacher">
+                <li>Home</li>
+            </a>
+
+            <a href="/teacher/classesTeacher">
+                <li>Classes</li>
+            </a>
+        </div>
+        <div class="c-item search">
+            <form action="/admin/search" method="post" name="myForm" onsubmit="return validateForm()">
+                <input type="text" name="txtSearch" placeholder="Search username">
+            </form>
+        </div>
+        <div class="c-item profile">
+            <div class="user">
+                <img src="/images/logo-admin.png" height="50" alt="">
+                    {{user.name}}
+                <div class="dropdown">
+                    <a href="/admin/updateAdmin"> Update profile </a>
+                    <a href="/logout"> Logout </a>
+                </div>
+            </div>
+        </div>
+        <style>
+            .wrap-1-1 {
+                display: flex;
+                
+            }
+        </style>
+        <div class="wrap-1-1">
+                <div class="c-item body">
+                <h2>Scoring for students: <div >{{student}}<div></h2>
+                <input type="hidden" name="txtStudent" id="user-name" value="{{student}}">
+                {{!-- {{#each sub.submitAss}}
+                <a style="color: blue;" href="/downloadzipp?filename={{filename}}">{{filename}}</a> <br>
+                {{/each}} --}}
+        
+                <style>
+                    .frame-main {
+                        width: 700px;
+                        height: 400px;
+                    }
+                    .wrap-right {
+                        padding: 10px;
+                    }
+                    .comment-user {
+                        width: 100%;
+                        resize: none;
+                    }
+                </style>
+                <div class="wrap-frame">
+                    <iframe class="frame-main" src="https://docs.google.com/gview?url={{user_ass.file_url}}&embedded=true"></iframe>
+                </div>
+            </div>
+
+            <div class="wrap-right">
+                <form action="scoreStudent" method="post">
+                    <input id="title-ex" type="hidden" name="txtTitle" value="{{title}}">
+                    <input type="hidden" name="txtStudent" value="{{student}}">
+                    Score: <input id="score-result" type="number" name="score" min="0" max="100"> /100 <br><br>
+                    <br>
+                    <div>
+                        <div>Comment for this assignment: </div>
+                        <br>
+                        <textarea class="comment-user" placeholder="Type your comment" name="" id="comment-user" cols="30" rows="10"></textarea>
+                    </div>
+                    <button id="save" onclick="marking()">Add</button>
+                    <a id="cancel" href="/teacher">Cancel</a>
+                </form>
+            </div>
+        </div>
+		
+    </div>
+    <script>
+        async function marking() {
+            const res= await axios({
+                url: "http://localhost:2000/teacher/marking",
+                method: "post",
+                data: {
+                    user_name: $("#user-name").val(),
+                    title: $("#title-ex").val(),
+                    score: $("#score-result").val(),
+                    comment: $("#comment-user").val()
+                }
+            })
+            const result= await res.data
+        }
+    </script>
+    <footer>
+        QM - English
+    </footer>
+</body>
+
+</html>

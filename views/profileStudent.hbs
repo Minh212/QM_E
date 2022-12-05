@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="c-item nav">
+            <div class="logo-uni">
+                <img src="/images/logo_QM.png" alt="">
+            </div>
+            <a href="/student">
+                <li>Home</li>
+            </a>
+
+            <a href="/student/classesStudent">
+                <li>Classes</li>
+            </a>
+        </div>
+        <div class="c-item search">
+            <form action="/admin/search" method="post" name="myForm" onsubmit="return validateForm()">
+                <input type="text" name="txtSearch" placeholder="Search username">
+            </form>
+        </div>
+        <div class="c-item profile">
+            <div class="user">
+                <img src="/images/logo-admin.png" height="50" alt="">
+                {{user.name}}
+                <div class="dropdown">
+                    <a href="/student/profileStudent"> Profile </a>
+                    <a href="/logout"> Logout </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="c-item body">
+            <h2>Profile Student</h2>
+            <form action="editStudent" method="post">
+                <input type="hidden" name="txtID" value="{{ur._id}}">
+                Username: {{student.userName}}<br><br>
+                Password: {{student.password}}<br><br>
+                Full name: {{student.name}}<br> <br>
+                Email: {{student.email}}<br><br>
+                Age: {{student.age}}<br><br>
+                Phone: {{student.phone_number}}<br><br>
+                Address: {{student.address}}<br><br>
+                Images: <br>
+                {{#each student.files}}
+                <img src="../uploads/{{filename}}" height="200px" width="200px">
+
+                {{/each}}<br><br>
+
+                <a id="save" href="/student/editStudent">Update</a>
+
+                <a id="cancel" href="/student">Cancel</a>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        QM - English
+    </footer>
+</body>
+
+</html>

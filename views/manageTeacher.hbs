@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Teacher</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="c-item nav">
+            <div class="logo-uni">
+                <img src="/images/logo_QM.png" alt="">
+            </div>
+            <a href="/admin">
+                <li>Home</li>
+            </a>
+            <a href="/admin/manageStudent">
+                <li>Manage Students</li>
+            </a>
+            <a href="/admin/manageTeacher">
+                <li style="background-color: #ddd;">Manage Teachers</li>
+            </a>
+            <a href="/admin/manageClass">
+                <li>Manage Classes</li>
+            </a>
+        </div>
+        <div class="c-item search">
+            <form action="/admin/search" method="post" name="myForm" onsubmit="return validateForm()">
+                <input type="text" name="txtSearch" placeholder="Search username">
+            </form>
+        </div>
+        <div class="c-item profile">
+            <div class="user">
+                <img src="/images/logo-admin.png" height="50" alt="">
+                {{user.name}}
+                <div class="dropdown">
+                    <a href="/admin/updateAdmin"> Update profile </a>
+                    <a href="/logout"> Logout </a>
+                </div>
+            </div>
+        </div>
+        <div class="c-item controller">
+
+            <div>
+                <a href="/admin/addTeacher">Add Teacher</a>
+            </div>
+        </div>
+        <div class="c-item body">
+            <table>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Username</th>
+                    <th>Phone</th>
+                    <th>Controller</th>
+                </tr>
+                {{#each teacher}}
+                <tr>
+                    <td>{{name}}</td>
+                    <td><a id="detail" href="/admin/detailUser?id={{_id}}">{{userName}}</a></td>
+                    <td>{{phone_number}}</td>
+                    <td>
+                        <center>
+                            <a id="save" href="/admin/addClassTeacher?id={{_id}}">Add class</a>
+                            
+                            <a id="delete" href="/admin/deleteTeacher?userName={{userName}}"
+                                onclick="return confirm('Delete this teacher?');">Delete</a>
+                        </center>
+                    </td>
+                </tr>
+                {{/each}}
+            </table>
+        </div>
+    </div>
+    <footer>
+        QM - English
+    </footer>
+</body>
+
+</html>

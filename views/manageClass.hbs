@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Manage Student</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+	<script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>	
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div class="container">
+		<div class="c-item nav">
+			<div class="logo-uni">
+				<img src="/images/logo_QM.png" alt="">
+			</div>
+			<a href="/admin">
+				<li>Home</li>
+			</a>
+			<a href="/admin/manageStudent">
+				<li>Manage Students</li>
+			</a>
+			<a href="/admin/manageTeacher">
+				<li>Manage Teachers</li>
+			</a>
+			<a href="/admin/manageClass">
+				<li style="background-color: #ddd;">Manage Classes</li>
+			</a>
+		</div>
+		<div class="c-item search">
+			<form action="/admin/search" method="post" name="myForm" onsubmit="return validateForm()">
+				<input type="text" name="txtSearch" placeholder="Search username">
+			</form>
+		</div>
+		<div class="c-item profile">
+			<div class="user">
+				<img src="/images/logo-admin.png" height="50" alt="">
+				{{user.name}}
+				<div class="dropdown">
+					<a href="/admin/updateAdmin"> Update profile </a>
+					<a href="/logout"> Logout </a>
+				</div>
+			</div>
+		</div>
+		<div class="c-item controller">
+			<div>
+				<a href="/admin/addClass">Add Class</a>
+			</div>
+
+		</div>
+		<div class="c-item body">
+			<table>
+				<tr>
+					<th>Class Name</th>
+					<th>Course</th>
+					<th>Controller</th>
+				</tr>
+				{{#each data}}
+				<tr>
+					<td>{{className}}</td>
+					<td>{{course}}</td>
+					<td>
+						
+						<center>
+							<span class="hhahwuas" style="display: none">{{className}}</span>
+							<span data-id={{className}} class="open-mem" id="save" >View class</span>
+							<a class="class-name xyz-123" data-id={{className}} id="delete" href="/admin/deleteClass?className={{className}}"
+								onclick="return confirm('Delete this class?');">Delete</a>
+						</center>
+					</td>
+				</tr>
+				
+				{{/each}}
+			</table>
+			<style>
+				.member-list {
+					width: 100%;
+					height: 100%;
+					position: fixed;
+					top: 0;
+					left: 0;
+					background-color: rgba(0, 0, 0, 0.3);
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					display: none;
+				}
+				.member-list-center {
+					width: 300px;
+					padding: 10px;
+					border-radius: 5px;
+					background: #fff;
+				}
+				.btn-close {
+					direction: rtl;
+					cursor: pointer;
+				}
+			</style>
+			<div class="member-list">
+				<div class="member-list-center">
+					<span id="save" class="btn-close">Close</span>
+					<div id="detail-class" class="detail-class">
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer>
+		QM - English
+	</footer>
+	<script>
+		async function get_member(className) {
+			const res= await axios({
+				url: "http://localhost:2000/teacher/get/member",
+				method: "post",
+				data: {
+					className: className
+				}
+			})
+			const result= await res.data.allClass
+			document.getElementById("detail-class").innerHTML= `
+			<br />
+				<div>Class name: ${result.className}</div>
+				<div>Course: ${result.course}</div>
+				<br />
+			`+ result.studentsList.map((item, key)=> `<div>Member ${parseInt(key)+1}</div><div>Name: ${item.name}</div><div>Name: ${item.userName}</div>`)
+			return console.log(result)
+		}
+		$(".open-mem").on("click", function() {
+			if($(".member-list").css("display")=== "none")
+			$(".member-list").css("display", "flex")
+			get_member($(this).attr("data-id"))
+		})
+		$(".btn-close").on("click", function() {
+			$(".member-list").css("display", "none")
+		})
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="c-item nav">
+            <div class="logo-uni">
+                <img src="/images/logo_QM.png" alt="">
+            </div>
+            <a href="/teacher">
+                <li>Home</li>
+            </a>
+            
+            <a href="/teacher/classesTeacher">
+                <li>Classes</li>
+            </a>
+        </div>
+        <div class="c-item search">
+            <form action="/admin/search" method="post" name="myForm" onsubmit="return validateForm()">
+                <input type="text" name="txtSearch" placeholder="Search username">
+            </form>
+        </div>
+        <div class="c-item profile">
+            <div class="user">
+                <img src="/images/logo-admin.png" height="50" alt="">
+                {{user.name}}
+                <div class="dropdown">
+                    <a href="/admin/updateAdmin"> Update profile </a>
+                    <a href="/logout"> Logout </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="c-item body">
+            <h2>Profile Teacher</h2>
+            <form action="editTeacher" enctype="multipart/form-data" method="post">
+                <input type="hidden" name="txtID" value="{{teacher._id}}">
+                Full name: <input type="text" name="name" value="{{teacher.name}}" > <br> <br>
+                Username: <input type="text" name="username" value="{{teacher.userName}}" > <br><br>
+                Email: <input type="text" name="email" value="{{teacher.email}}" > <br><br>
+                Age: <input type="number" name="age" min="6" value="{{teacher.age}}" > <br><br>
+                Phone: <input type="text" name="phone" value="{{teacher.phone_number}}" > <br><br>
+                Address: <input type="text" name="address" value="{{teacher.address}}" > <br><br>
+                Old image: <br>
+                {{#each teacher.files}}
+                <img src="../uploads/{{filename}}" height="200px" width="200px"><br><br>
+                {{/each}}
+                New image: <input type="file" name="myFile"><br><br>
+                <input id="save" type="submit" value="Save">
+                <a id="cancel" href="/teacher/profileTeacher">Cancel</a>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        QM - English
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Manage Student</title>
+	 <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div class="container">
+		<div class="c-item nav">
+			<div class="logo-uni">
+				<img src="/images/logo_QM.png" alt="">
+			</div>
+			<a href="/student">
+				<li>Home</li>
+			</a>
+
+			<a href="/student/classesStudent">
+				<li style="background-color: #ddd;">Classes</li>
+			</a>
+		</div>
+		<div class="c-item search">
+			<form action="/admin/search" method="post" name="myForm" onsubmit="return validateForm()">
+				<input type="text" name="txtSearch" placeholder="Search username">
+			</form>
+		</div>
+		<div class="c-item profile">
+			<div class="user">
+				<img src="/images/logo-admin.png" height="50" alt="">
+				{{user.name}}
+				<div class="dropdown">
+					<a href="/student/profileStudent"> Profile </a>
+					<a href="/logout"> Logout </a>
+				</div>
+			</div>
+		</div>
+		<style>
+			.ahsjkhjkehawas {
+				padding: 30px !important;
+				border: 1px solid #d9d9d9;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+		</style>
+		<div class="c-item controller">
+			<div onclick="get_member()" class="ahsjkhjkehawas">Members</div>
+		</div>
+		<div style="padding: 20px">
+			<div id="list-teacher" class="aklsjkldjasas">
+
+			</div>
+			<br>
+			<br>
+			<div id="list-member">
+
+			</div>
+		</div>
+		<div class="c-item body">
+			<div class="container">
+				<div class="table-wrapper">
+					<div class="table-title">
+						<div class="row">
+							<div class="col-sm-8">
+								<h2>ASSIGNMENT</h2>
+							</div>
+						</div>
+					</div>
+					<table class="table table-bordered">
+						<tbody>
+							{{#each assignment}}
+							<tr>
+								<td>
+									Tittle: <a href="/student/detailHWStudent?title={{title}}">{{title}}</a> 
+								</td>
+							</tr>
+							{{/each}}
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{!-- <footer>
+		QM - English
+	</footer> --}}
+	<script>
+		const urlSearchParams = new URLSearchParams(window.location.search)
+		const myParam = urlSearchParams.get('className');
+		async function get_member() {
+			const res= await axios({
+				url: "http://localhost:2000/teacher/get/member",
+				method: "post",
+				data: {
+					className: myParam
+				}
+			})
+			const result= await res.data
+			console.log(result)
+			document.getElementById("list-teacher").innerHTML= `<strong>Teacher</strong>`+result.teacher.map(item=> `
+				<div>Name: ${item.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Username: ${item.userName}</div>
+			`)
+			document.getElementById("list-member").innerHTML= `<strong>Member</strong>` + result.member.map(item=> `
+				<div>Name: ${item.name}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Username: ${item.userName}</div>
+			`)
+		}
+	</script>
+</body>
+
+</html>

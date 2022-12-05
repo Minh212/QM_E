@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Teacher</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="c-item nav">
+            <div class="logo-uni">
+                <img src="/images/logo_QM.png" alt="">
+            </div>
+            <a href="/teacher">
+                <li>Home</li>
+            </a>
+
+            <a href="/teacher/classesTeacher">
+                <li>Classes</li>
+            </a>
+        </div>
+        <div class="c-item search">
+            <form action="/admin/search" method="post" name="myForm" onsubmit="return validateForm()">
+                <input type="text" name="txtSearch" placeholder="Search username">
+            </form>
+        </div>
+        <div class="c-item profile">
+            <div class="user">
+                <img src="/images/logo-admin.png" height="50" alt="">
+                {{user.name}}
+                <div class="dropdown">
+                    <a href="/admin/updateAdmin"> Update profile </a>
+                    <a href="/logout"> Logout </a>
+                </div>
+            </div>
+        </div>
+        <div class="c-item controller">
+            
+        </div>
+        <div class="c-item body">
+            <h2>Submit Assignment</h2>
+            <form action="submitAssignment" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="title" value="{{title}}">
+				<br>
+                Choose files: <br>
+                <input type="file" name="myFiles"><br><br>
+
+                <input id="save" type="submit" value="Add">
+                <a id="cancel" href="/student/classesStudent">Cancel</a>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        QM - English
+    </footer>
+</body>
+
+</html>

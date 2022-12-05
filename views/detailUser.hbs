@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Student</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="c-item nav">
+            <div class="logo-uni">
+                <img src="/images/logo_QM.png" alt="">
+            </div>
+            <a href="/admin"><li>Home</li></a>
+            <a href="/admin/manageStudent"> <li>Manage Students</li></a>
+            <a href="/admin/manageTeacher"> <li>Manage Teachers</li></a>
+            <a href="/admin/manageClass"> <li>Manage Classes</li></a>
+        </div>
+        <div class="c-item search">
+            <form action="/admin/search" method="post">
+                <input type="text" name="txtSearch" placeholder="Search username">
+            </form>
+        </div>
+        <div class="c-item profile">
+            <div class="user">
+                <img src="/images/logo-admin.png" height="50" alt="">
+                {{user.name}}
+                <div class="dropdown">
+                    <a href="/admin/updateAdmin"> Update profile </a>
+                    <a href="/logout"> Logout </a>
+                </div>
+            </div>
+        </div>
+       
+        <div class="c-item body">
+            {{#if data}}
+                <h2>User Profile</h2>
+                Role: {{data.role}} <br>
+                Username: {{data.userName}} <br>
+                Password: {{data.password}} <br>
+
+                Full name: {{data.name}} <br>
+                Age: {{data.age}} <br>
+                Phone: {{data.phone_number}} <br>
+                Email: {{data.email}} <br>
+                Address: {{data.address}} <br>
+                Image: <br>
+                {{#each data.files}}
+                <img src="../uploads/{{filename}}" height="200px" width="200px">
+                <br>
+                
+                {{/each}}
+                <br><br>
+                    
+                <a id="save" href="/admin/editUser?id={{data._id}}">Edit profile</a>
+                <a id="cancel" href="/admin">Cancel</a>
+            {{else}}
+                <center><h1>User not found!</h1></center>
+            {{/if}}
+        </div>
+    </div>
+    <footer>
+        QM - English
+    </footer>
+</body>
+</html>

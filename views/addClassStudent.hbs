@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Manage Teacher</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+	<div class="container">
+		<div class="c-item nav">
+			<div class="logo-uni">
+				<img src="/images/logo_QM.png" alt="">
+			</div>
+			<a href="/admin">
+				<li>Home</li>
+			</a>
+			<a href="/admin/manageStudent">
+				<li>Manage Students</li>
+			</a>
+			<a href="/admin/manageTeacher">
+				<li style="background-color: #ddd;">Manage Teachers</li>
+			</a>
+			<a href="/admin/manageClass">
+				<li>Manage Classes</li>
+			</a>
+		</div>
+		<div class="c-item search">
+			<form action="/admin/search" method="post" name="myForm" onsubmit="return validateForm()">
+				<input type="text" name="txtSearch" placeholder="Search username">
+			</form>
+		</div>
+		<div class="c-item profile">
+			<div class="user">
+				<img src="/images/logo-admin.png" height="50" alt="">
+				{{user.name}}
+				<div class="dropdown">
+					<a href="/admin/updateAdmin"> Update profile </a>
+					<a href="/logout"> Logout </a>
+				</div>
+			</div>
+		</div>
+		<div class="c-item controller">
+
+			<div>
+				<a href="/admin/addTeacher">Add Teacher</a>
+			</div>
+		</div>
+		<div class="c-item body">
+			<center>
+
+				<form action="addClassToStudent" method="POST">
+					<input type="hidden" value="{{student._id}}" name="txtID">
+					<input type="hidden" value="{{student.name}}" name="name">
+					<input type="hidden" value="{{student.userName}}" name="userName">
+					{{!-- old classes --}}
+					{{#each student.Classes}}
+					<input type="checkbox" checked id="" name="CS" value="{{this}}"> {{this}} <br>
+					{{/each}}
+
+					{{!-- new classes --}}
+					{{#each new}}
+					<input type="checkbox" id="" name="CS" value="{{this}}">
+					{{this}}
+					<br>
+					{{/each}}
+					<br>
+					<input type="submit" value="Update">
+				</form>
+
+			</center>
+		</div>
+	</div>
+	<footer>
+		QM - English
+	</footer>
+</body>
+
+</html>

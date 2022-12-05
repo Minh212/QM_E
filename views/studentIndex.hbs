@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="c-item nav">
+            <div class="logo-uni">
+                <img src="/images/logo_QM.png" alt="">
+            </div>
+            <a href="/student">
+                <li style="background-color: #ddd;">Home</li>
+            </a>
+            
+            <a href="/student/classesStudent">
+                <li>Classes</li>
+            </a>
+        </div>
+        <div class="c-item search">
+            <form action="/admin/search" method="post" name="myForm" onsubmit="return validateForm()">
+                <input type="text" name="txtSearch" placeholder="Search username">
+            </form>
+        </div>
+        <div class="c-item profile">
+            <div class="user">
+                <img src="/images/logo-admin.png" height="50" alt="">
+                {{user.name}}
+                <div class="dropdown">
+                    <a href="/student/profileStudent"> Profile </a>
+                    <a href="/logout"> Logout </a>
+                </div>
+            </div>
+        </div>
+        <div class="c-item controller">
+
+        </div>
+        <div class="c-item body">
+            <div class="slideshow">
+                <img src="/images/banner1.png" alt="" height="500px" class="mySlides">
+                <img src="/images/banner2.png" alt="" height="500px" class="mySlides">
+                <img src="/images/banner3.png" alt="" height="500px" class="mySlides">
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        QM - English
+    </footer>
+
+    {{!-- script --}}
+    <script>
+        function validateForm() {
+            let x = document.forms["myForm"]["txtSearch"].value;
+            if (x == "") {
+                alert("username must be filled out");
+                return false;
+            }
+        }
+
+        var myIndex = 0;
+        carousel();
+
+        function carousel() {
+            var i;
+            var x = document.getElementsByClassName("mySlides");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            myIndex++;
+            if (myIndex > x.length) { myIndex = 1 }
+            x[myIndex - 1].style.display = "block";
+            setTimeout(carousel, 2500);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,335 @@
+/* #leftLogin{
+	margin-left: 1100px;
+} */
+.backG1{
+	background-color: #FFFACD;
+	margin-top: 0%;
+}
+
+.container {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 15% 70% 15%;
+}
+
+.c-item {
+    border: gainsboro 1px solid;
+}
+
+.nav {
+    grid-column: 1;
+    grid-row: 1/4;
+}
+
+.logo-uni img {
+    max-width: 100%;
+}
+
+.nav li {
+    list-style-type: none;
+    padding: 10px 20px;
+}
+
+.nav li:hover {
+    background-color: #ddd;
+}
+
+.controller {
+    grid-column: 2/4;
+    height: 100px;
+    display: flex;
+    border-bottom: none;
+}
+
+.controller div {
+    border: 1px solid gainsboro;
+    margin: auto;
+    margin-top: 20px;
+    padding: 30px 0px;
+    border-radius: 5px;
+}
+
+.controller a {
+    padding: 30px;
+}
+
+.controller a:hover {
+    background-color: #ddd;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+}
+
+.body {
+    grid-column: 2/4;
+    min-height: 500px;
+    border-top: none;
+    padding: 20px;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+
+.search {
+    display: flex;
+}
+
+.search form {
+    margin: auto;
+    width: 800px;
+}
+
+.search input {
+    border: 1px solid white;
+    width: 100%;
+    height: 30px;
+}
+
+.search input:hover {
+    background-color: gainsboro;
+    border-radius: 5px;
+}
+
+.profile {
+    display: flex;
+}
+
+.user {
+    margin: auto;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {
+    background-color: #ddd;
+}
+
+.user:hover .dropdown {
+    display: block;
+}
+
+footer {
+    height: 30px;
+    padding-top: 10px;
+    text-align: center;
+    color: black;
+    background-color: #e29d00;
+
+    position: absolute;
+    bottom: 0;
+    width: calc(100vw - 10px);
+}
+
+
+/* table */
+
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table td,
+table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    max-width: 130px;
+}
+
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: cornflowerblue;
+    color: white;
+}
+
+#delete {
+    padding: 5px 15px;
+    background-color: #f0723c;
+    color: #f5faf5;
+    border: 1px solid #f0723c;
+    border-radius: 5px;
+}
+
+#delete:hover {
+    background-color: #bd3e08;
+    border: 1px solid #bd3e08;
+}
+
+#detail {
+    color: #4c78d8;
+}
+
+#detail:hover {
+    color: blue;
+}
+
+#pass {
+    padding: 5px 15px;
+    background-color: #6ded6f;
+    color: #f5faf5;
+    border: 1px solid #6ded6f;
+    border-radius: 5px;
+}
+
+#pass:hover {
+    background-color: #41ab43;
+    border: 1px solid #41ab43;
+}
+
+
+/* end table */
+/* #Add {
+    margin-top: 10px;
+    padding: 5px 15px;
+    background-color: #74c576;
+    color: #f5faf5;
+    border: 1px solid #74c576;
+    border-radius: 5px;
+}
+#Add:hover {
+    background-color: #41ab43;
+    border: 1px solid #41ab43;
+} */
+
+#save {
+    margin-top: 10px;
+    padding: 5px 15px;
+    background-color: #77b4f2;
+    color: #f5faf5;
+    border: 1px solid #77b4f2;
+    border-radius: 5px;
+}
+
+#save:hover {
+    background-color: #3e95ed;
+    border: 1px solid #3e95ed;
+}
+
+#cancel {
+    padding: 5px 15px;
+    background-color: #9faab6;
+    color: #f5faf5;
+    border: 1px solid #9faab6;
+    border-radius: 5px;
+}
+
+#cancel:hover {
+    background-color: #6a7683;
+    border: 1px solid #6a7683;
+}
+
+h2 {
+    border-top: 1px solid gainsboro;
+    padding-top: 20px;
+}
+
+#add {
+    width: 250px;
+}
+
+.slideshow {
+    display: flex;
+}
+
+.slideshow img {
+    margin: auto;
+}
+
+
+/* login */
+/* @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700); */
+
+
+
+.login {
+  width: 400px;
+  margin: 16px auto;
+  font-size: 16px;
+}
+
+/* Reset top and bottom margins from certain elements */
+.login-header,
+.login p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* The triangle form is achieved by a CSS hack */
+.login-triangle {
+  width: 0;
+  margin-right: auto;
+  margin-left: auto;
+  border: 12px solid transparent;
+  border-bottom-color: #e29d00;
+}
+
+.login-header {
+  background: #e29d00;
+  padding: 20px;
+  font-size: 1.4em;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.login-container {
+  background: #ebebeb;
+  padding: 12px;
+}
+
+/* Every row inside .login-container is defined with p tags */
+.login p {
+  padding: 12px;
+}
+
+.login input {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  padding: 16px;
+  outline: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+}
+
+
+.login input[type="submit"] {
+  background: #e29d00;
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.login input[type="submit"]:hover {
+  background: #C55300;
+}
+
+/* Buttons' focus effect */
+.login input[type="submit"]:focus {
+  border-color: #05a;
+}

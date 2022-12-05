@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Manage Teacher</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+	<script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<div class="c-item nav">
+			<div class="logo-uni">
+				<img src="/images/logo_QM.png" alt="">
+			</div>
+			<a href="/student">
+				<li>Home</li>
+			</a>
+			<a href="/student/classesStudent">
+				<li style="background-color: #ddd;">Classes</li>
+			</a>
+		</div>
+		<div class="c-item search">
+			<form action="/admin/search" method="post" name="myForm" onsubmit="return validateForm()">
+				<input type="text" name="txtSearch" placeholder="Search username">
+			</form>
+		</div>
+		<div class="c-item profile">
+			<div class="user">
+				<img src="/images/logo-admin.png" height="50" alt="">
+				<div>{{user.name}}</div>
+				<div style="display: none" id="name-user">{{clss._id}}</div>
+				<div class="dropdown">
+					<a href="/student/profileStudent"> Profile </a>
+					<a href="/logout"> Logout </a>
+				</div>
+			</div>
+		</div>
+		<div class="c-item controller">
+			
+		</div>
+		<div class="c-item body">
+			<input id="class_name" type="text" placeholder="Join class">
+			<button id="join-class">Join</button>
+			<table>
+                <tr>
+                    <th>Class Name</th>
+					
+					<th>Controller</th>
+                </tr>
+               {{#each clss.Classes}}
+                <tr>
+                    <td>{{this}}</td>
+                    
+                    <td>
+                        <center>
+                            <a id="save" href="/student/detailClassStudent?className={{this}}">Detail</a>
+                        </center>
+                    </td>
+                </tr>
+				{{/each}}
+            </table>
+
+
+			
+		</div>
+	</div>
+	<footer>
+		QM - English
+	</footer>
+
+</body>
+	<script>
+		async function joinclass() {
+			const res= await axios({
+				url: "http://localhost:2000/teacher/join-class",
+				method: "POST",
+				data: {
+					class_name: $("#class_name").val(),
+					user: $("#name-user").html()
+				}
+			})
+		}
+		$("#join-class").on("click", ()=> {
+			joinclass()
+			window.location.reload()
+		})
+	</script>
+</html>
