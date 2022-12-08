@@ -100,7 +100,13 @@ app.post('/register', upload.array('myFiles'), async (req, res) => {
     res.redirect('/')
 })
 
+app.get('/login', (req, res) => {
+    res.render('login')
+})
+
+
 app.post('/login', async (req, res) => {
+
     const name = req.body.txtName
     const pass = req.body.txtPass
     const role = await checkUserRole(name, pass)
@@ -130,9 +136,7 @@ app.post('/login', async (req, res) => {
     }
 })
 
-app.get('/login', (req, res) => {
-    res.render('login')
-})
+
 
 app.get('/logout', (req, res) => {
     req.session.destroy()
